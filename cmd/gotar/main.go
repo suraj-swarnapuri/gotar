@@ -12,8 +12,10 @@ func main() {
 	// scale := &scale.ChromaticScale{}
 	// scale.GenerateNotes(note.Blank)
 
-	scale := &scale.MajorScale{}
-	scale.GenerateNotes(note.C)
 
-	board.Display(scale)
+	scale := scale.NewMajorScale(note.C)
+
+	//chord := chord.NewMinorChord(&scale)
+
+	board.Display(&scale)
 }

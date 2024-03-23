@@ -26,6 +26,7 @@ func InitBoard() Fretboard {
 }
 
 func (f Fretboard) Display(s scale.Scale) {
+	fmt.Printf("\t\t\t\tThe %s scale\n", s.Name())
 	displayString(f.board["E"], s)
 	fmt.Println()
 	displayString(f.board["A"], s)
@@ -39,6 +40,8 @@ func (f Fretboard) Display(s scale.Scale) {
 	displayString(f.board["e"], s)
 }
 
+
+
 func addString(n note.Note) []note.Note {
 	guitarString := make([]note.Note, 12)
 	for i := 0; i < 12; i++ {
@@ -48,13 +51,19 @@ func addString(n note.Note) []note.Note {
 	return guitarString
 }
 
+
+
 func displayString(notes []note.Note, s scale.Scale) {
-	fmt.Print(notes[0])
+	if contains(s.Notes(),notes[0]) {
+		fmt.Print(notes[0])
+	} else {
+		fmt.Print(note.Blank)
+	}
 	fmt.Print(" |--")
 	for i, n := range notes {
 		n = n.StepUp()
 		var tmpN note.Note
-		if s.Contains(n) {
+		if contains(s.Notes(),n) {
 			tmpN = n
 		} else {
 			tmpN = note.Blank
@@ -73,4 +82,13 @@ func displayString(notes []note.Note, s scale.Scale) {
 
 	}
 	fmt.Println()
+}
+
+func contains(notes []note.Note, n note.Note) bool {
+	for _, note := range notes {
+		if note == n {
+			return true
+		}
+	}
+	return false
 }

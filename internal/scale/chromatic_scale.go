@@ -6,21 +6,22 @@ type ChromaticScale struct {
 	notes []note.Note
 }
 
-func (cs *ChromaticScale) GenerateNotes(n note.Note) []note.Note {
+func NewChromaticScale() ChromaticScale{
+	cs := ChromaticScale{}
 	notes := make([]note.Note, 12)
 	notes[0] = note.C
 	for i := 1; i < 12; i++ {
 		notes[i] = notes[i-1].StepUp()
 	}
 	cs.notes = notes
-	return notes
+	return cs
 }
 
-func (cs *ChromaticScale) Contains(n note.Note) bool {
-	for _, note := range cs.notes {
-		if note == n {
-			return true
-		}
-	}
-	return false
+func (cs *ChromaticScale) Notes() []note.Note {
+	return cs.notes
 }
+
+func (cs *ChromaticScale) Name() string {
+	return "chromatic"
+}
+

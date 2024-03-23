@@ -1,13 +1,22 @@
 package scale
 
-import "github.com/suraj-swarnapuri/gotar/internal/note"
+import (
+	"fmt"
+
+	"github.com/suraj-swarnapuri/gotar/internal/note"
+)
 
 type MajorScale struct {
 	notes []note.Note
+	tonic note.Note
 }
 
-func (ms *MajorScale) GenerateNotes(n note.Note) []note.Note {
+func NewMajorScale(n note.Note) MajorScale {
+	ms := MajorScale{}
+	ms.tonic = n
 	notes := make([]note.Note, 7)
+	// Major scale is W-W-H-W-W-W-H
+
 	notes[0] = n
 	notes[1] = notes[0].StepUp().StepUp()
 	notes[2] = notes[1].StepUp().StepUp()
@@ -16,14 +25,13 @@ func (ms *MajorScale) GenerateNotes(n note.Note) []note.Note {
 	notes[5] = notes[4].StepUp().StepUp()
 	notes[6] = notes[5].StepUp().StepUp()
 	ms.notes = notes
-	return notes
+	return ms
 }
 
-func (ms *MajorScale) Contains(n note.Note) bool {
-	for _, note := range ms.notes {
-		if note == n {
-			return true
-		}
-	}
-	return false
+func (ms *MajorScale) Name() string {
+	return fmt.Sprintf("%s major", ms.tonic.String())
+}
+
+func (ms *MajorScale) Notes() []note.Note {
+	return ms.notes
 }
