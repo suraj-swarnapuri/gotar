@@ -13,8 +13,8 @@ type DorianScale struct {
 }
 
 // NewDorianScale generates the notes of the Dorian scale
-func NewDorianScale(n note.Note) DorianScale {
-	ds := DorianScale{}
+func NewDorianScale(n note.Note) *DorianScale {
+	ds := &DorianScale{}
 	ds.tonic = n
 	notes := make([]note.Note, 7)
 	// Dorian scale is W-H-W-W-W-H-W

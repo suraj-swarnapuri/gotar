@@ -13,8 +13,8 @@ type AeolianScale struct {
 }
 
 // GenerateNotes generates the notes of the Aeolian scale
-func NewAeolianScale(n note.Note) AeolianScale {
-	as := AeolianScale{}
+func NewAeolianScale(n note.Note) *AeolianScale {
+	as := &AeolianScale{}
 	as.tonic = n
 	notes := make([]note.Note, 7)
 	// Aeolian scale is W-H-W-W-H-W-W

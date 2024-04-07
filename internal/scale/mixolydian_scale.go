@@ -13,8 +13,8 @@ type MixolydianScale struct {
 }
 
 // GenerateNotes generates the notes of the Mixolydian scale
-func NewMixolydianScale(n note.Note) MixolydianScale {
-	ms := MixolydianScale{}
+func NewMixolydianScale(n note.Note) *MixolydianScale {
+	ms := &MixolydianScale{}
 	ms.tonic = n
 	notes := make([]note.Note, 7)
 	// Mixolydian scale is W-W-H-W-W-H-W

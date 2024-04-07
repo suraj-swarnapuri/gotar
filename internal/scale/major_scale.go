@@ -11,8 +11,8 @@ type IonianScale struct {
 	tonic note.Note
 }
 
-func NewMajorScale(n note.Note) IonianScale {
-	ms := IonianScale{}
+func NewMajorScale(n note.Note) *IonianScale {
+	ms := &IonianScale{}
 	ms.tonic = n
 	notes := make([]note.Note, 7)
 	// Major scale is W-W-H-W-W-W-H

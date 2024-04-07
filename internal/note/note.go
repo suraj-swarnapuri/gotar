@@ -1,6 +1,8 @@
 // Package note contains the Scalel and functions for the atomic unit of measurement of music, a note.
 package note
 
+import "strings"
+
 // Make a enum called Note that holds the 12 notes in the chromatic scale.
 type Note int
 
@@ -46,6 +48,36 @@ func (i Interval) String() string {
 	}
 
 	return names[i]
+}
+
+func GetNote(name string) Note {
+	name = strings.ToUpper(name)
+	switch name {
+	case "C":
+		return C
+	case "C#":
+		return CSharp
+	case "D":
+		return D
+	case "D#":
+		return DSharp
+	case "E":
+		return E
+	case "F":
+		return F
+	case "F#":
+		return FSharp
+	case "G":
+		return GSharp
+	case "A":
+		return A
+	case "A#":
+		return ASharp
+	case "B":
+		return B
+	default:
+		return Blank
+	}
 }
 
 func (n Note) String() string {
