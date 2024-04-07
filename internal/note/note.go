@@ -1,4 +1,4 @@
-// Package note contains the model and functions for the atomic unit of measurement of music, a note.
+// Package note contains the Scalel and functions for the atomic unit of measurement of music, a note.
 package note
 
 // Make a enum called Note that holds the 12 notes in the chromatic scale.
@@ -20,21 +20,49 @@ const (
 	B
 )
 
+type Interval int
+
+const (
+	ZERO Interval = iota
+	I
+	II
+	III
+	IV
+	V
+	VI
+	VII
+)
+
+func (i Interval) String() string {
+	names := [...]string{
+		"- ",
+		"1 ",
+		"2 ",
+		"3 ",
+		"4 ",
+		"5 ",
+		"6 ",
+		"7 ",
+	}
+
+	return names[i]
+}
+
 func (n Note) String() string {
 	names := [...]string{
-		"-",
-		"C",
+		"- ",
+		"C ",
 		"C#",
-		"D",
+		"D ",
 		"D#",
-		"E",
-		"F",
+		"E ",
+		"F ",
 		"F#",
-		"G",
+		"G ",
 		"G#",
-		"A",
+		"A ",
 		"A#",
-		"B",
+		"B ",
 	}
 
 	return names[n]

@@ -8,7 +8,7 @@ import (
 
 // LydianScale represents the Lydian scale
 type LydianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
@@ -31,10 +31,5 @@ func NewLydianScale(n note.Note) LydianScale {
 
 // Name returns the name of the Lydian scale
 func (ls *LydianScale) Name() string {
-	return fmt.Sprintf("%s lydian", ls.tonic.String())
-}
-
-// Notes returns the notes of the Lydian scale
-func (ls *LydianScale) Notes() []note.Note {
-	return ls.notes
+	return fmt.Sprintf("%s Lydian Scale", ls.tonic.String())
 }

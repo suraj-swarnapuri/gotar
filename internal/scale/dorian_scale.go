@@ -8,7 +8,7 @@ import (
 
 // DorianScale represents the Dorian scale
 type DorianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
@@ -29,13 +29,7 @@ func NewDorianScale(n note.Note) DorianScale {
 	return ds
 }
 
-
 // Name returns the name of the Dorian scale
 func (ds *DorianScale) Name() string {
-	return fmt.Sprintf("%s dorian", ds.tonic.String())
-}
-
-// Notes returns the notes of the Dorian scale
-func (ds *DorianScale) Notes() []note.Note {
-	return ds.notes
+	return fmt.Sprintf("%s Dorian Scale", ds.tonic.String())
 }

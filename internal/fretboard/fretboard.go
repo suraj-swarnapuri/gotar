@@ -9,86 +9,79 @@ import (
 )
 
 type Fretboard struct {
-	board map[string][]note.Note
+	Board [][]note.Note
 }
 
-func InitBoard() Fretboard {
-	fb := Fretboard{}
-	fb.board = make(map[string][]note.Note, 6)
-	fb.board["E"] = addString(note.E)
-	fb.board["A"] = addString(note.A)
-	fb.board["D"] = addString(note.D)
-	fb.board["G"] = addString(note.G)
-	fb.board["B"] = addString(note.B)
-	fb.board["e"] = addString(note.E)
-
-	return fb
-}
-
-func (f Fretboard) Display(s scale.Scale) {
-	fmt.Printf("\t\t\t\tThe %s scale\n", s.Name())
-	displayString(f.board["E"], s)
-	fmt.Println()
-	displayString(f.board["A"], s)
-	fmt.Println()
-	displayString(f.board["D"], s)
-	fmt.Println("                   o             o             o             o                    :   ")
-	displayString(f.board["G"], s)
-	fmt.Println()
-	displayString(f.board["B"], s)
-	fmt.Println()
-	displayString(f.board["e"], s)
-}
-
-
-
-func addString(n note.Note) []note.Note {
-	guitarString := make([]note.Note, 12)
-	for i := 0; i < 12; i++ {
-		guitarString[i] = n
-		n = n.StepUp()
+func NewFretboard() Fretboard {
+	// set up a standard tuning fretboard
+	fb := &Fretboard{}
+	fb.Board = make([][]note.Note, 6)
+	for i := range fb.Board {
+		fb.Board[i] = make([]note.Note, 12)
 	}
-	return guitarString
+
+	openStrings := []note.Note{note.E, note.A, note.D, note.G, note.B, note.E}
+	for i, n := range openStrings {
+		currNote := n
+		for j := 0; j < 12; j++ {
+			fb.Board[i][j] = currNote
+			currNote = currNote.StepUp()
+		}
+	}
+
+	return *fb
 }
 
-
-
-func displayString(notes []note.Note, s scale.Scale) {
-	if contains(s.Notes(),notes[0]) {
-		fmt.Print(notes[0])
-	} else {
-		fmt.Print(note.Blank)
+func (fb Fretboard) print(noteMap map[note.Note]note.Interval, intervalOn bool) {
+	for i := 0; i <= 12; i++ {
+		if i >= 10 {
+			fmt.Printf("%v| ", i)
+			continue
+		}
+		fmt.Printf("%v | ", i)
 	}
-	fmt.Print(" |--")
-	for i, n := range notes {
-		n = n.StepUp()
-		var tmpN note.Note
-		if contains(s.Notes(),n) {
-			tmpN = n
+	fmt.Println("\n--------------------------------------------------")
+	for _, ns := range fb.Board {
+		for _, n := range ns {
+			if !intervalOn {
+				fmt.Print(n.String() + "| ")
+			} else {
+				fmt.Print(noteMap[n].String() + "| ")
+			}
+
+		}
+		if !intervalOn {
+			fmt.Print(ns[0].String() + "\n")
 		} else {
-			tmpN = note.Blank
-		}
-
-		if i == len(notes)-1 {
-			fmt.Printf("%s--|", tmpN.String())
-			break
-		}
-
-		if len(tmpN.String()) == 2 {
-			fmt.Printf("%s--|--", tmpN.String())
-		} else {
-			fmt.Printf("%s---|--", tmpN.String())
+			fmt.Print(noteMap[ns[0]].String() + "\n")
 		}
 
 	}
-	fmt.Println()
 }
 
-func contains(notes []note.Note, n note.Note) bool {
-	for _, note := range notes {
-		if note == n {
-			return true
+func (fb Fretboard) Display(sc scale.Scale, intervalOn bool) {
+	if sc == nil {
+		fb.print(nil, false)
+		return
+	}
+
+	fmt.Println(sc.Name())
+
+	notes := sc.ListNotes()
+	noteMap := make(map[note.Note]note.Interval, len(notes))
+	interval := note.I
+	for _, n := range notes {
+		noteMap[n] = interval
+		interval++
+	}
+	noteMap[note.Blank] = note.ZERO
+
+	for i := range fb.Board {
+		for j := range fb.Board[i] {
+			if _, ok := noteMap[fb.Board[i][j]]; !ok {
+				fb.Board[i][j] = note.Blank
+			}
 		}
 	}
-	return false
+	fb.print(noteMap, intervalOn)
 }
