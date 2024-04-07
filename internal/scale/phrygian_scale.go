@@ -8,7 +8,7 @@ import (
 
 // PhrygianScale represents the Phrygian scale
 type PhrygianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
@@ -29,13 +29,7 @@ func NewPhyrgianScale(n note.Note) PhrygianScale {
 	return ps
 }
 
-
 // Name returns the name of the Phrygian scale
 func (ps *PhrygianScale) Name() string {
-	return fmt.Sprintf("%s phrygian", ps.tonic.String())
-}
-
-// Notes returns the notes of the Phrygian scale
-func (ps *PhrygianScale) Notes() []note.Note {
-	return ps.notes
+	return fmt.Sprintf("%s Phrygian Scale", ps.tonic.String())
 }

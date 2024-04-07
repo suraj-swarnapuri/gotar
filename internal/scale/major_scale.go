@@ -6,13 +6,13 @@ import (
 	"github.com/suraj-swarnapuri/gotar/internal/note"
 )
 
-type MajorScale struct {
-	notes []note.Note
+type IonianScale struct {
+	BaseScale
 	tonic note.Note
 }
 
-func NewMajorScale(n note.Note) MajorScale {
-	ms := MajorScale{}
+func NewMajorScale(n note.Note) IonianScale {
+	ms := IonianScale{}
 	ms.tonic = n
 	notes := make([]note.Note, 7)
 	// Major scale is W-W-H-W-W-W-H
@@ -28,10 +28,6 @@ func NewMajorScale(n note.Note) MajorScale {
 	return ms
 }
 
-func (ms *MajorScale) Name() string {
-	return fmt.Sprintf("%s major", ms.tonic.String())
-}
-
-func (ms *MajorScale) Notes() []note.Note {
-	return ms.notes
+func (ms *IonianScale) Name() string {
+	return fmt.Sprintf("%s Ionian Scale", ms.tonic.String())
 }

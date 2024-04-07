@@ -8,12 +8,12 @@ import (
 
 // AeolianScale represents the Aeolian scale
 type AeolianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
 // GenerateNotes generates the notes of the Aeolian scale
-func  NewAeolianScale(n note.Note) AeolianScale {
+func NewAeolianScale(n note.Note) AeolianScale {
 	as := AeolianScale{}
 	as.tonic = n
 	notes := make([]note.Note, 7)
@@ -29,11 +29,7 @@ func  NewAeolianScale(n note.Note) AeolianScale {
 	return as
 }
 
-func (as *AeolianScale) Notes() []note.Note {
-	return as.notes
-}
-
 // Name returns the name of the Aeolian scale
 func (as *AeolianScale) Name() string {
-	return fmt.Sprintf("%s aeolian", as.tonic.String())
+	return fmt.Sprintf("%s Aeolian Scale", as.tonic.String())
 }

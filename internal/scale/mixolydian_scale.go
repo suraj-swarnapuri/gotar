@@ -8,12 +8,12 @@ import (
 
 // MixolydianScale represents the Mixolydian scale
 type MixolydianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
 // GenerateNotes generates the notes of the Mixolydian scale
-func NewMixolydianScale(n note.Note) MixolydianScale{
+func NewMixolydianScale(n note.Note) MixolydianScale {
 	ms := MixolydianScale{}
 	ms.tonic = n
 	notes := make([]note.Note, 7)
@@ -29,22 +29,7 @@ func NewMixolydianScale(n note.Note) MixolydianScale{
 	return ms
 }
 
-// Contains checks if the given note is in the Mixolydian scale
-func (ms *MixolydianScale) Contains(n note.Note) bool {
-	for _, note := range ms.notes {
-		if note == n {
-			return true
-		}
-	}
-	return false
-}
-
 // Name returns the name of the Mixolydian scale
 func (ms *MixolydianScale) Name() string {
-	return fmt.Sprintf("%s mixolydian", ms.tonic.String())
-}
-
-// Notes returns the notes of the Mixolydian scale
-func (ms *MixolydianScale) Notes() []note.Note {
-	return ms.notes
+	return fmt.Sprintf("%s Mixolydian Scale", ms.tonic.String())
 }

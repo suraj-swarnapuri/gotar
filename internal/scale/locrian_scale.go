@@ -8,7 +8,7 @@ import (
 
 // LocrianScale represents the Locrian scale
 type LocrianScale struct {
-	notes []note.Note
+	BaseScale
 	tonic note.Note
 }
 
@@ -31,11 +31,5 @@ func NewLocrianScale(n note.Note) LocrianScale {
 
 // Name returns the name of the Locrian scale
 func (ls *LocrianScale) Name() string {
-	return fmt.Sprintf("%s locrian", ls.tonic.String())
+	return fmt.Sprintf("%s Locrian Scale", ls.tonic.String())
 }
-
-// Notes returns the notes of the Locrian scale
-func (ls *LocrianScale) Notes() []note.Note {
-	return ls.notes
-}
-

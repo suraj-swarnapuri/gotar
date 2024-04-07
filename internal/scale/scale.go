@@ -6,7 +6,21 @@ import "github.com/suraj-swarnapuri/gotar/internal/note"
 // Scale is the interface to generate a series of notes.
 type Scale interface {
 	// Returns series of notes for the scale in a given key.
-	Notes() []note.Note
+	ListNotes() []note.Note
+	// Returns the specific note in the scale
+	GetNote(num note.Interval) note.Note
 	// Returns the name of the scale.
 	Name() string
+}
+
+type BaseScale struct {
+	notes []note.Note
+}
+
+func (bs BaseScale) ListNotes() []note.Note {
+	return bs.notes
+}
+
+func (bs BaseScale) GetNote(num note.Interval) note.Note {
+	return bs.notes[num]
 }
