@@ -13,8 +13,8 @@ type LydianScale struct {
 }
 
 // GenerateNotes generates the notes of the Lydian scale
-func NewLydianScale(n note.Note) LydianScale {
-	ls := LydianScale{}
+func NewLydianScale(n note.Note) *LydianScale {
+	ls := &LydianScale{}
 	ls.tonic = n
 	notes := make([]note.Note, 7)
 	// Lydian scale is W-W-W-H-W-W-H

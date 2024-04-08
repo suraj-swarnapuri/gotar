@@ -13,8 +13,8 @@ type PhrygianScale struct {
 }
 
 // GenerateNotes generates the notes of the Phrygian scale
-func NewPhyrgianScale(n note.Note) PhrygianScale {
-	ps := PhrygianScale{}
+func NewPhyrgianScale(n note.Note) *PhrygianScale {
+	ps := &PhrygianScale{}
 	ps.tonic = n
 	notes := make([]note.Note, 7)
 	// Phrygian scale is H-W-W-W-H-W-W

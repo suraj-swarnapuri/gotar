@@ -13,8 +13,8 @@ type LocrianScale struct {
 }
 
 // GenerateNotes generates the notes of the Locrian scale
-func NewLocrianScale(n note.Note) LocrianScale {
-	ls := LocrianScale{}
+func NewLocrianScale(n note.Note) *LocrianScale {
+	ls := &LocrianScale{}
 	ls.tonic = n
 	notes := make([]note.Note, 7)
 	// Locrian scale is H-W-W-H-W-W-W
