@@ -14,6 +14,12 @@ var ScaleCmd = &cobra.Command{
 	Use:   "scale",
 	Short: "Print a visualization of a scale on the fretboard.",
 	Long:  "Display a visualization of a particular scale on the fretboard.",
+}
+
+var fretboardCmd = &cobra.Command{
+	Use:   "fretboard",
+	Short: "Prints a vizualization of the 12 frets of the guitar.",
+	Long:  "Prints 12 frets of the guitar with all the notes.",
 	RunE:  displayScale(),
 }
 
@@ -21,6 +27,7 @@ func init() {
 	ScaleCmd.PersistentFlags().BoolP("show-interval", "i", false, "displays intervals instead of notes")
 	ScaleCmd.PersistentFlags().StringP("tonic", "t", "", "the tonic of the scale, aka the first note of the scale.")
 
+	ScaleCmd.AddCommand(fretboardCmd)
 	ScaleCmd.AddCommand(MajorScaleCmd)
 	ScaleCmd.AddCommand(AeolianScaleCmd)
 	ScaleCmd.AddCommand(LydianScaleCmd)
