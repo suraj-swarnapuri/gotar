@@ -26,7 +26,10 @@ func (bs BaseScale) ListNotes() []note.Note {
 }
 
 func (bs BaseScale) GetNote(num note.Interval) note.Note {
-	return bs.notes[num]
+	if num == note.ZERO {
+		return note.Blank
+	}
+	return bs.notes[num-1]
 }
 
 func GetScale(tonic note.Note, mode string) Scale {

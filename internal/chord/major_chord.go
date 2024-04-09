@@ -12,12 +12,18 @@ type MajorChord struct {
 }
 
 func NewMajorChord(sc scale.Scale) MajorChord {
-	mc := &MajorChord{}
-	mc.chordMap[note.I] = sc.GetNote(note.I)
-	mc.chordMap[note.III] = sc.GetNote(note.III)
-	mc.chordMap[note.V] = sc.GetNote(note.V)
+	chordMap := make(map[note.Interval]note.Note)
+	chordMap[note.I] = sc.GetNote(note.I)
+	chordMap[note.III] = sc.GetNote(note.III)
+	chordMap[note.V] = sc.GetNote(note.V)
 
-	return *mc
+	mc := MajorChord{
+		BaseChord{
+			chordMap: chordMap,
+		},
+	}
+
+	return mc
 }
 
 func (mc MajorChord) Name() string {

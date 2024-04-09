@@ -12,12 +12,17 @@ type AugmentedChord struct {
 }
 
 func NewAugmentedChord(sc scale.Scale) AugmentedChord {
-	ac := &AugmentedChord{}
-	ac.chordMap[note.I] = sc.GetNote(note.I)
-	ac.chordMap[note.III] = sc.GetNote(note.III)
-	ac.chordMap[note.V] = sc.GetNote(note.V).StepUp()
+	chordMap := make(map[note.Interval]note.Note)
+	chordMap[note.I] = sc.GetNote(note.I)
+	chordMap[note.III] = sc.GetNote(note.III)
+	chordMap[note.V] = sc.GetNote(note.V).StepUp()
 
-	return *ac
+	ac := AugmentedChord{
+		BaseChord{
+			chordMap: chordMap,
+		},
+	}
+	return ac
 }
 
 func (ac AugmentedChord) Name() string {

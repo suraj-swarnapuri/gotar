@@ -7,19 +7,24 @@ import (
 	"github.com/suraj-swarnapuri/gotar/internal/scale"
 )
 
-type NewDiminishedChord struct {
+type DiminishedChord struct {
 	BaseChord
 }
 
-func NewNewDiminishedChord(sc scale.Scale) NewDiminishedChord {
-	mc := &NewDiminishedChord{}
-	mc.chordMap[note.I] = sc.GetNote(note.I)
-	mc.chordMap[note.III] = sc.GetNote(note.III).StepDown()
-	mc.chordMap[note.V] = sc.GetNote(note.V).StepDown()
+func NewDiminishedChord(sc scale.Scale) DiminishedChord {
+	chordMap := make(map[note.Interval]note.Note)
+	chordMap[note.I] = sc.GetNote(note.I)
+	chordMap[note.III] = sc.GetNote(note.III).StepDown()
+	chordMap[note.V] = sc.GetNote(note.V).StepDown()
 
-	return *mc
+	mc := DiminishedChord{
+		BaseChord{
+			chordMap: chordMap,
+		},
+	}
+	return mc
 }
 
-func (mc NewDiminishedChord) Name() string {
+func (mc DiminishedChord) Name() string {
 	return fmt.Sprintf("%s Diminished Chord", mc.chordMap[note.I].String())
 }

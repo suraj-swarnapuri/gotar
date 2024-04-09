@@ -12,12 +12,18 @@ type MinorChord struct {
 }
 
 func NewMinorChord(s scale.Scale) MinorChord {
-	mc := &MinorChord{}
-	mc.chordMap[note.I] = s.GetNote(note.I)
-	mc.chordMap[note.III] = s.GetNote(note.III).StepDown()
-	mc.chordMap[note.V] = s.GetNote(note.V)
+	chordMap := make(map[note.Interval]note.Note)
+	chordMap[note.I] = s.GetNote(note.I)
+	chordMap[note.III] = s.GetNote(note.III).StepDown()
+	chordMap[note.V] = s.GetNote(note.V)
 
-	return *mc
+	mc := MinorChord{
+		BaseChord{
+			chordMap: chordMap,
+		},
+	}
+
+	return mc
 }
 
 func (mc MinorChord) Name() string {
