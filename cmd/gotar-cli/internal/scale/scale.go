@@ -8,8 +8,6 @@ import (
 
 type CommandRun func(cmd *cobra.Command, args []string) error
 
-var Tonic note.Note
-
 var ScaleCmd = &cobra.Command{
 	Use:   "scale",
 	Short: "Print a visualization of a scale on the fretboard.",

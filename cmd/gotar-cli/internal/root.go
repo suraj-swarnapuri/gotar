@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/suraj-swarnapuri/gotar/cmd/gotar-cli/internal/chord"
 	"github.com/suraj-swarnapuri/gotar/cmd/gotar-cli/internal/scale"
 )
 
@@ -24,6 +25,7 @@ func init() {
 
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(scale.ScaleCmd)
+	rootCmd.AddCommand(chord.ChordCmd)
 }
 
 func Execute() error {
