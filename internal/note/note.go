@@ -33,6 +33,11 @@ const (
 	V
 	VI
 	VII
+	VIII
+	IX
+	X
+	XI
+	XII
 )
 
 func (i Interval) String() string {

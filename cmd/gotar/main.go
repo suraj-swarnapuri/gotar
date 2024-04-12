@@ -4,16 +4,14 @@ import (
 	"github.com/suraj-swarnapuri/gotar/internal/chord"
 	"github.com/suraj-swarnapuri/gotar/internal/fretboard"
 	"github.com/suraj-swarnapuri/gotar/internal/note"
-	"github.com/suraj-swarnapuri/gotar/internal/scale"
 )
 
 func main() {
 	// ...
 	board := fretboard.NewFretboard()
 
-	sc := scale.NewMajorScale(note.C)
-	chrd := chord.NewDiminishedChord(sc)
+	chrd := chord.NewChord(note.C)
 
-	board.Display(chrd, false) // base default board
+	board.Display(chrd.Major().Seven(), true) // base default board
 
 }
