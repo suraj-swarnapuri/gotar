@@ -1,0 +1,14 @@
+A Key holds a scale
+  - it can do everything a scale can do 
+  - it can generate the chords in that Key
+
+A Scale holds a list of notes
+  - it can list out all the notes in the scale
+  - it can return a specific note given an interval
+  - it knows the name of itself
+
+A Chord is a subset of the major scale
+   - it can do everything a scale can do
+   - it has a base which is either Major, Minor, Augmented, or Diminished
+   - it can take extensions 
+
